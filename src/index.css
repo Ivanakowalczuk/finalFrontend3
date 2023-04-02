@@ -93,7 +93,9 @@ form{
   flex-wrap: wrap;
   margin: 0 auto;
 }
-
+.imgdoctor{
+  width: 100%;
+}
 table {
  border-collapse: collapse;
     border-spacing: 0;
