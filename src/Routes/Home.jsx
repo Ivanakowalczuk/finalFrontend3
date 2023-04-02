@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../Components/Card'
+import { Link} from 'react-router-dom'
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
@@ -19,9 +20,8 @@ const Home = () => {
     <main className="" >
       <h1>Home</h1>
       <div className='card-grid'>
-{dentist.length
-    ? dentist.map(dentist => (<Card key={dentist.id} data={dentist}/>))
-    : null
+{dentist.length && dentist.map(dentist => (<Link key={dentist.id} to={'/detail/' + dentist.id}> <Card  data={dentist}/></Link>))
+    
 }  
       </div>
     </main>
