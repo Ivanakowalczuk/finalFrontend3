@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useGlobalStates } from '../Components/utils/global.context'
 
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Detail = () => {
-  const [dentist, setDentist] = useState([])
  
+ const {dentist} = useGlobalStates()
   const navigate = useNavigate()
   const params = useParams()
 
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
-  const url = `https://jsonplaceholder.typicode.com/users/${params.id}`
+const dentistFav = dentist.find((den)=> den.id == params.id)
 
-  useEffect(()=>{
-   fetch(url)
-       .then(res => res.json())
-       .then(data => setDentist(data))
-  },[])
-
-  const addFav= () => {
-    localStorage.setItem('dentist', JSON.stringify(dentist) )
-  }
   return (
     <>
       <h1>Detail Dentist {params.id} </h1>
       <div className='card'>
       
-      <h3>{dentist.name}</h3>
-        <h4>{dentist.email}</h4>
-        <p>{dentist.phone}</p>
-        <p>{dentist.website}</p>
-        <button className="favButton" onClick={addFav}>AddFav</button>
+      <h3>{dentistFav.name}</h3>
+        <h4>{dentistFav.email}</h4>
+        <p>{dentistFav.phone}</p>
+        <p>{dentistFav.website}</p>
+     
         </div>
         <button onClick={() => navigate(-1)}>Go back</button>
      
