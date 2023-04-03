@@ -31,7 +31,7 @@ const Detail = () => {
         <h4>{dentist.email}</h4>
         <p>{dentist.phone}</p>
         <p>{dentist.website}</p>
-        <button onClick={addFav}>AddFav</button>
+        <button className="favButton" onClick={addFav}>AddFav</button>
         </div>
         <button onClick={() => navigate(-1)}>Go back</button>
      

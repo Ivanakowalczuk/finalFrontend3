@@ -1,11 +1,9 @@
 import React from "react";
 
-
 const Card = ({data}) => {
-
-
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
+ 
+  const addFav= () => {
+    localStorage.setItem('dentist', JSON.stringify(data) )
   }
 
   return (
@@ -16,9 +14,7 @@ const Card = ({data}) => {
         <h4>{data.username}</h4>
         <p>{data.id}</p>
 
-
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
-
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
         <button onClick={addFav} className="favButton">Add fav</button>
     </div>
