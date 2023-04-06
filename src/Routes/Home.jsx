@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Card from '../Components/Card'
 import { Link} from 'react-router-dom'
 import { useGlobalStates } from '../Components/utils/global.context'
@@ -7,13 +7,13 @@ import { useGlobalStates } from '../Components/utils/global.context'
 
 
 const Home = () => {
-  const {dentist} = useGlobalStates()
-console.log(dentist)
+  const {dentistState} = useGlobalStates()
+console.log(dentistState)
   return (
     <main className="" >
       <h1>Home</h1>
       <div className='card-grid'>
-      {dentist.length && dentist.map(dentist => (<Link key={dentist.id} to={'/detail/' + dentist.id}> <Card data={dentist}/></Link>))}  
+      {dentistState.length && dentistState.map(dentist => (<Link key={dentist.id} to={'/detail/' + dentist.id}> <Card data={dentist}/></Link>))}  
 
       </div>
     </main>
