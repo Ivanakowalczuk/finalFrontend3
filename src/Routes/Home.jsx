@@ -7,13 +7,15 @@ import { useGlobalStates } from '../Components/utils/global.context'
 
 
 const Home = () => {
-  const {dentistState} = useGlobalStates()
+  const {dentistState, themeState} = useGlobalStates()
+  
+
 console.log(dentistState)
   return (
-    <main className="" >
+    <main className={themeState.className} >
       <h1>Home</h1>
       <div className='card-grid'>
-      {dentistState.length && dentistState.map(dentist => (<Link key={dentist.id} to={'/detail/' + dentist.id}> <Card data={dentist}/></Link>))}  
+      {dentistState.dentistList.map(dentist => (<Link key={dentist.id} to={'/detail/' + dentist.id}> <Card dentist={dentist}/></Link>))}  
 
       </div>
     </main>

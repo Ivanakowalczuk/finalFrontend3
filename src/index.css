@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
@@ -19,16 +20,61 @@ code {
   cursor: pointer;
 }
 
+.detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.backButton{
+  background-color: rgba(136, 136, 136, 0.116);
+  padding: 10px;
+  border: none;
+  width: 100px;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
 h1{
   text-align: center;
 }
 
 nav{
   display: flex;
-  width: 80vw;
-  justify-content: flex-start;
-  padding: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100vw;
+ }
+
+.themeButton{
+  width: 2rem;
+  height: 2rem;
+  order: 3;
+    
 }
+div nav div{
+ display: flex;
+ justify-content: space-around;
+ width: 40%;
+ order: 2;
+ 
+ 
+ }
+
+ nav div a{
+  color: white;
+ }
+
+ nav a h1{
+  color: white;
+ }
+
+ nav h1 span{
+  color: rgb(247, 122, 122);
+ }
 
 a{
   color: #000;
@@ -42,25 +88,36 @@ a:hover{
 
 footer {
   display: flex;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
   padding: 2rem;
   position: relative;
   bottom: 0;
-  width: 90%;
+  width: 100%;
   height: 40px;
   margin-top: 2rem;
 }
 
-footer > img{
-  width: 200px;
-  margin: 0;
-}
-footer > p{
-  margin: 0;
-  padding-top: 0.7rem;
+footer .logo{
+    width: 200px;
 }
 
+footer .ico{
+  width: 28px;
+  
+}
+
+footer .redesSociales{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  width: 200px;
+  border-radius: 10px;
+ padding-left: 10px;
+padding-right: 10px;  
+
+}
 form{
   display: flex;
   flex-direction: column;
@@ -78,6 +135,7 @@ form{
   width: 200px;
   padding: 0.5rem 0.5rem 0 0.5rem;
   border: 0.5px solid rgb(136, 136, 136);
+  font-size: 12px;
 }
 
 .card:hover{
@@ -116,18 +174,28 @@ tr:nth-child(even) {
 }
 
 .dark{
-  background-color: #12121296;
+  background-color: black;
   color: white;
+}
+.dark > nav> div> a {
+  color: black;
 }
 .dark > a {
   color: white;
 }
-
-
-.light{
+.dark nav{
   background-color: white;
-  color: black;
 }
-.dark > a {
+.dark nav a h1{
   color: black;
+ }
+ .dark .card{
+  color: white;
+ }
+.light nav{
+  background-color: black;
+}
+
+.dark .favButton{
+  background-color: whitesmoke ;
 }

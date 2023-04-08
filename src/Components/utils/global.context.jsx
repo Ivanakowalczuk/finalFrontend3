@@ -1,27 +1,29 @@
 import { createContext, useContext, useEffect, useReducer, useState } from "react";
 
+
 const ContextGlobal = createContext();
 const themes = {
   dark: {
       theme: true,
-      bgColor: 'black',
-      color: 'white'
+      className: 'dark'
   },
   light: {
       theme: false,
-      bgColor: 'white',
-      color: 'black'
+      className: 'light'
+     
   }
 }
 
-const initialDentistState = []
+const initialDentistState = {dentistList:[], dentistDetail:{}}
 const initialThemeState= themes.light
 const initialFavState = JSON.parse(localStorage.getItem('favs')) || []
 
 const dentistReducer = (state, action) => {
   switch(action.type){
-      case 'GET_DENTIST':
-          return action.payload
+    case 'GET_DENTISTS':
+      return {dentistList: action.payload, dentistDetail: state.dentistDetail}
+  case 'GET_DENTIST':
+      return {dentistDetail: action.payload, dentistList: state.dentistList}
       default:
           throw new Error
   }
@@ -64,14 +66,21 @@ const ContextProvider = ({ children }) => {
 useEffect(() => {
     fetch(url)
     .then(res => res.json())
-    .then(data => dentistDispatch({type: 'GET_DENTIST', payload: data}))
+    .then(data => dentistDispatch({type: 'GET_DENTISTS', payload: data}))
 }, [])
 
- 
+const getDentist = (id) => {
+  let url = 'https://jsonplaceholder.typicode.com/users/' + id;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => dentistDispatch({ type: 'GET_DENTIST', payload: data }))
+}
+
+
   
  
   return (
-    <ContextGlobal.Provider value={{dentistState, themeState, themeDispatch, favState, favDispatch}}>
+    <ContextGlobal.Provider value={{dentistState, themeState, themeDispatch, favState, favDispatch, getDentist}}>
       {children}
     </ContextGlobal.Provider>
   );
