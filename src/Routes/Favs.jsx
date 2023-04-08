@@ -6,15 +6,19 @@ import { useGlobalStates } from "../Components/utils/global.context";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Favs = () => {
-  const {favState, themeState} = useGlobalStates()
+  const {favState, themeState, favDispatch} = useGlobalStates()
+  
+  const deleteFav=(id)=>{
+  
+  }
 
-console.log(favState)
+
   return (
 
   <div className={themeState.className}>
       <h1>Dentists Favs</h1>
       <div className='card-grid light'>
-      {favState.map(fav => (<Link key={fav.id} to={'/detail/' + fav.id}> <Card dentist={fav}/></Link>))}  
+      {favState.map(fav => (<Link key={fav.id} to={'/detail/' + fav.id}> <Card dentist={fav} deleteFav={deleteFav}/></Link>))}  
    
         </div>
      

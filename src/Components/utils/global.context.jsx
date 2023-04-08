@@ -43,6 +43,10 @@ const favReducer = (state, action) => {
   switch(action.type){
       case 'ADD_FAV':
           return [...state, action.payload]
+      
+      case 'DELETE_FAV':
+      return [...state, action.payload]
+      
       default:
           throw new Error
   }
@@ -75,9 +79,7 @@ const getDentist = (id) => {
     .then(response => response.json())
     .then(data => dentistDispatch({ type: 'GET_DENTIST', payload: data }))
 }
-
-
-  
+ 
  
   return (
     <ContextGlobal.Provider value={{dentistState, themeState, themeDispatch, favState, favDispatch, getDentist}}>
