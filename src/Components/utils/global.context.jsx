@@ -16,8 +16,7 @@ const themes = {
 
 const initialDentistState = {dentistList:[], dentistDetail:{}}
 const initialThemeState= themes.light
-const initialFavState = {favList:[] }
-
+const initialFavState =  {favList: JSON.parse(localStorage.getItem('favs')) || [] } 
 const dentistReducer = (state, action) => {
   switch(action.type){
     case 'GET_DENTISTS':
@@ -52,6 +51,7 @@ const favReducer = (state, action) => {
       } else {
         // Si no es un favorito, agrégalo
         const newFavList = [...state.favList, dentista];
+        localStorage.setItem('favs', JSON.stringify(newFavList));
         return { favList: newFavList };
       }
     default:
@@ -71,6 +71,7 @@ const ContextProvider = ({children}) => {
   const [favState, favDispatch] = useReducer(favReducer, initialFavState)
   
   const url = 'https://jsonplaceholder.typicode.com/users'
+
 
 
 useEffect(() => {
