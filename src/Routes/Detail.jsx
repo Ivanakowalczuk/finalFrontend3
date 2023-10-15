@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGlobalStates } from '../Components/utils/global.context'
 
@@ -8,7 +8,7 @@ import { useGlobalStates } from '../Components/utils/global.context'
 
 const Detail = () => {
     const {id} = useParams()
-  const {dentistState, dentistDispatch, getDentist} = useGlobalStates()
+  const {dentistState, getDentist} = useGlobalStates()
   const navigate = useNavigate()
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
 useEffect(() => {

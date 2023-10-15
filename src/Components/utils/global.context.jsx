@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer} from "react";
 
 
 const ContextGlobal = createContext();
@@ -16,7 +16,7 @@ const themes = {
 
 const initialDentistState = {dentistList:[], dentistDetail:{}}
 const initialThemeState= themes.light
-const initialFavState = JSON.parse(localStorage.getItem('favs')) || []
+const initialFavState = {favList:[] }
 
 const dentistReducer = (state, action) => {
   switch(action.type){
@@ -40,32 +40,38 @@ const themeReducer = (state, action) => {
   }
 }
 const favReducer = (state, action) => {
-  switch(action.type){
-      case 'ADD_FAV':
-          return [...state, action.payload]
-      
-      case 'DELETE_FAV':
-      return [...state, action.payload]
-      
-      default:
-          throw new Error
+  switch (action.type) {
+    case 'ADD_FAV':
+      const dentista = action.payload;
+      const esFavorito = state.favList.find((fav) => fav.id === dentista.id);
+
+      if (esFavorito) {
+        // Si ya es un favorito, elimínalo
+        const newFavList = state.favList.filter((item) => item.id !== esFavorito.id);
+        return { favList: newFavList };
+      } else {
+        // Si no es un favorito, agrégalo
+        const newFavList = [...state.favList, dentista];
+        return { favList: newFavList };
+      }
+    default:
+      return state;
   }
-}
+};
+
+          
 
 
 
 
-const ContextProvider = ({ children }) => {
+const ContextProvider = ({children}) => {
   
   const [dentistState, dentistDispatch] = useReducer(dentistReducer, initialDentistState)
   const [themeState, themeDispatch] = useReducer(themeReducer, initialThemeState)
   const [favState, favDispatch] = useReducer(favReducer, initialFavState)
   
   const url = 'https://jsonplaceholder.typicode.com/users'
-   
-    useEffect(() => {
-    localStorage.setItem('favs', JSON.stringify(favState))
-}, [favState])
+
 
 useEffect(() => {
     fetch(url)
@@ -79,7 +85,8 @@ const getDentist = (id) => {
     .then(response => response.json())
     .then(data => dentistDispatch({ type: 'GET_DENTIST', payload: data }))
 }
- 
+
+
  
   return (
     <ContextGlobal.Provider value={{dentistState, themeState, themeDispatch, favState, favDispatch, getDentist}}>

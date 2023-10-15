@@ -7,15 +7,22 @@ import { useGlobalStates } from '../Components/utils/global.context'
 
 
 const Home = () => {
-  const {dentistState, themeState} = useGlobalStates()
+  const {dentistState, themeState, favState} = useGlobalStates()
   
-
 console.log(dentistState)
   return (
     <main className={themeState.className} >
       <h1>Home</h1>
       <div className='card-grid'>
-      {dentistState.dentistList.map(dentist => (<Link key={dentist.id} to={'/detail/' + dentist.id}> <Card dentist={dentist}/></Link>))}  
+    
+      {dentistState.dentistList.map(dentist => {
+  const isFavorite = favState.favList.some(fav => fav.id === dentist.id);
+  return (
+    <Link key={dentist.id} to={'/detail/' + dentist.id}>
+      <Card dentist={dentist} fav={isFavorite} />
+    </Link>
+  );
+})}
 
       </div>
     </main>
